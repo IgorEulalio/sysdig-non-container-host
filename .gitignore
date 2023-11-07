@@ -1,0 +1,18 @@
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# env files
+**/env
+**/**/env
+
+example-voting-app/
+
+# sysdig-scanner local store
+sysdig-scanner/main.db/
+sysdig-scanner/main.db.meta.json
+sysdig-scanner/scan-logs
