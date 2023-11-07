@@ -21,7 +21,7 @@ resource "aws_security_group" "this" {
 resource "aws_instance" "this" {
   ami                  = data.aws_ami.i.id
   instance_type        = "t3.micro"
-  iam_instance_profile = aws_iam_role.this.name
+  iam_instance_profile = aws_iam_instance_profile.this.name
   subnet_id            = data.aws_subnets.private_subnets.ids[0]
   vpc_security_group_ids = [
     aws_security_group.this.id,
@@ -53,5 +53,10 @@ resource "aws_iam_role" "this" {
 resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   role       = aws_iam_role.this.name
+}
+
+resource "aws_iam_instance_profile" "this" {
+  name = "ssm-managed-core-instance-profile"
+  role = aws_iam_role.this.name
 }
 
