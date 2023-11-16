@@ -2,7 +2,7 @@ data "aws_ssm_parameter" "vpc_id" {
   name = "/sysdig-eks/vpc-id"
 }
 
-data "aws_subnets" "private_subnets" {
+data "aws_subnets" "public_subnets" {
   filter {
     name   = "vpc-id"
     values = [data.aws_ssm_parameter.vpc_id.value]
@@ -10,7 +10,7 @@ data "aws_subnets" "private_subnets" {
 
   filter {
     name   = "tag:Name"
-    values = ["*-private-*"]
+    values = ["*-public-*"]
   }
 }
 
